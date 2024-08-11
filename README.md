@@ -11,5 +11,5 @@ python3 roleChaining.py -p <profile>
 ```
 git clone https://github.com/AsifTra/aws_tools.git
 cd aws_tools/
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
