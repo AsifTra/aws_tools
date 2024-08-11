@@ -1,6 +1,6 @@
 ## AWS IAM Role Chaining Tool
 
-A simple recon tool for finding which of the roles you have permission on can be used to chaining another role
+Quickly identify and leverage role chaining opportunities by discovering roles you can assume to gain further access in your AWS environment.
 
 ```console
 python3 roleChaining.py -p <profile>
