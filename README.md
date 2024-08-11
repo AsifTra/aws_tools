@@ -9,7 +9,7 @@ python3 roleChaining.py -p <profile>
 
 ## Installation
 ```
-git clone [git@github.com:andresriancho/enumerate-iam.git](https://github.com/AsifTra/aws_tools.git)
+git clone https://github.com/AsifTra/aws_tools.git
 cd aws_tools/
 pip install -r requirements.txt
 ```
