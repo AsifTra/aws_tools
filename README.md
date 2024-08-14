@@ -1,6 +1,6 @@
 ## AWS IAM Role Chaining Tool
 
-Quickly identify and leverage role chaining opportunities by discovering roles you can assume to gain further access in your AWS environment.
+Quickly identify and leverage role chaining opportunities by discovering roles you can assume to gain further access to your AWS environment.
 
 ```console
 python3 roleChaining.py -p <profile>
@@ -15,7 +15,7 @@ python3 IAM_keys_validator.py -f <filename in a <ACCESS_KEY>:<SECRET_KEY> format
 python3 IAM_keys_validator.py -ak <ACCESS_KEY> -sk <SECRET_KEY>
 ```
 TODO:
-  * Add support for sts tokens if the user has already a session
+  * Add support for sts tokens if the user already has a session
 
 ## Installation
 ```
