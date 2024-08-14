@@ -82,7 +82,6 @@ def main():
     elif args.access_key and args.secret_key:
         access_key = args.access_key
         secret_key = args.secret_key
-        cprint(f"Access key: {access_key}, Secret key: {secret_key}", "green")
         create_session(access_key, secret_key, region="us-east-1", session_token=args.session_token)
     else:
         cprint("No valid input provided.", "red")
