@@ -14,7 +14,7 @@ Testing a large number of key pairs at once
 python3 IAM_keys_validator.py -f <filename containing IAM keys in a <ACCESS_KEY>:<SECRET_KEY> format>
 python3 IAM_keys_validator.py -ak <ACCESS_KEY> -sk <SECRET_KEY>
 ```
-#TODO:
+TODO:
   * Add support for sts tokens
 
 ## Installation
