@@ -11,7 +11,7 @@ python3 roleChaining.py -p <profile>
 Testing a large number of key pairs at once
 
 ```console
-python3 IAM_keys_validator.py -f <filename containing IAM keys in a <ACCESS_KEY>:<SECRET_KEY> format>
+python3 IAM_keys_validator.py -f <filename in a <ACCESS_KEY>:<SECRET_KEY> format>
 python3 IAM_keys_validator.py -ak <ACCESS_KEY> -sk <SECRET_KEY>
 ```
 TODO:
