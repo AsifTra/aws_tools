@@ -8,14 +8,13 @@ python3 roleChaining.py -p <profile>
 
 ## AWS IAM keys validator
 
-Testing IAM key pairs at mass
+Testing IAM key pairs at mass or separately
 
 ```console
-python3 IAM_keys_validator.py -f <filename in a <ACCESS_KEY>:<SECRET_KEY> format>
+python3 IAM_keys_validator.py -f <filename in a <ACCESS_KEY>:<SECRET_KEY>(:SESSION_TOKEN) format>
 python3 IAM_keys_validator.py -ak <ACCESS_KEY> -sk <SECRET_KEY>
+python3 IAM_keys_validator.py -ak <ACCESS_KEY> -sk <SECRET_KEY> -st <SESSION_TOKEN>
 ```
-TODO:
-  * Add support for sts tokens if the user already has a session
 
 ## Installation
 ```
