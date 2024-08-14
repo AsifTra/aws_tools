@@ -8,7 +8,7 @@ python3 roleChaining.py -p <profile>
 
 ## AWS IAM keys validator
 
-Testing a large number of key pairs at once
+Testing IAM key pairs at mass
 
 ```console
 python3 IAM_keys_validator.py -f <filename in a <ACCESS_KEY>:<SECRET_KEY> format>
