@@ -15,7 +15,7 @@ python3 IAM_keys_validator.py -f <filename in a <ACCESS_KEY>:<SECRET_KEY> format
 python3 IAM_keys_validator.py -ak <ACCESS_KEY> -sk <SECRET_KEY>
 ```
 TODO:
-  * Add support for sts tokens
+  * Add support for sts tokens if the user has already a session
 
 ## Installation
 ```
