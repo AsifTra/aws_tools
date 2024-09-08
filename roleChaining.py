@@ -1,4 +1,5 @@
 import boto3
+import botocore.exceptions
 import argparse
 import json
 import sys
@@ -30,40 +31,48 @@ def authenticate_user(session):
         cprint(f'Error authenticating user:\n{e}', 'red')
         sys.exit(1)
 
-def list_assume_role(session, user_arn):
-    """List all roles and the roles the user can assume."""
+def get_assumable_roles(session, user_arn):
+    """List all account roles and which of those roles the user can assume."""
     client = session.client('iam')
     roles = []
-
-    for page in client.get_paginator('list_roles').paginate():
-        roles.extend(page['Roles'])
-
-    assumable_roles = [
-        {
-            'RoleName': role['RoleName'],
-            'RoleArn': role['Arn']
-        }
-        for role in roles
-        if get_assume_role_permission(role['AssumeRolePolicyDocument'], user_arn)
-    ]
-
-    return assumable_roles
+    try:
+        for page in client.get_paginator('list_roles').paginate():
+            roles.extend(page['Roles'])
+        assumable_roles = [
+            {
+                'RoleName': role['RoleName'],
+                'RoleArn': role['Arn']
+            }
+            for role in roles
+            if get_assume_role_permission(role['AssumeRolePolicyDocument'], user_arn)
+        ]
+        return assumable_roles
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == 'AccessDenied':
+            cprint(f"Access Denied: {e.response['Error']['Message']}", "red")
+            sys.exit(1)
+        else:
+            cprint(f"An unexpected error occurred: {e.response['Error']['Message']}", "red")
+            sys.exit(1)
 
 def get_assume_role_permission(policy_document, user_arn):
     """Check if the given user ARN can assume the role based on its policy document."""
     for statement in policy_document.get('Statement', []):
         if statement.get('Effect') == 'Allow' and 'Principal' in statement:
+            # TODO: Add cases of NotDeny effect.
             principal_arns = statement['Principal'].get('AWS', [])
             if isinstance(principal_arns, str):
                 principal_arns = [principal_arns]
             if user_arn in principal_arns:
                 return True
+        else:
+            cprint(f"No assumables roles found for {user_arn}", "red")
+            sys.exit(0)
     return False
 
 def role_chaning_check(session, assumable_roles):
     """For each assumable role, check both inline and managed policies to see if the role allows assuming another role."""
     client = session.client('iam')
-
     for role in assumable_roles:
         role_name = role['RoleName']
         role_arn = role['RoleArn']
@@ -133,7 +142,7 @@ def main():
     args = parse_arguments()
     session = get_session(args.profile)
     user_arn = authenticate_user(session)
-    assumable_roles = list_assume_role(session, user_arn)
+    assumable_roles = get_assumable_roles(session, user_arn)
     role_chaning_check(session, assumable_roles)
 
 if __name__ == '__main__':
