@@ -65,9 +65,6 @@ def get_assume_role_permission(policy_document, user_arn):
                 principal_arns = [principal_arns]
             if user_arn in principal_arns:
                 return True
-        else:
-            cprint(f"No assumables roles found for {user_arn}", "red")
-            sys.exit(0)
     return False
 
 def role_chaning_check(session, assumable_roles):
