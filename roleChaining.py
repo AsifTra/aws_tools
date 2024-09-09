@@ -56,10 +56,9 @@ def get_assumable_roles(session, user_arn):
             sys.exit(1)
 
 def get_assume_role_permission(policy_document, user_arn):
-    """Check if the given user ARN can assume the role based on its policy document."""
+    """Check if the given user has permission on a given role based on its policy document."""
     for statement in policy_document.get('Statement', []):
         if statement.get('Effect') == 'Allow' and 'Principal' in statement:
-            # TODO: Add cases of NotDeny effect.
             principal_arns = statement['Principal'].get('AWS', [])
             if isinstance(principal_arns, str):
                 principal_arns = [principal_arns]
@@ -117,6 +116,8 @@ def policy_allows_assume_role(policy_document):
     for statement in policy_document.get('Statement', []):
         if statement.get('Effect') == 'Allow' and 'sts:AssumeRole' in statement.get('Action', []):
             return True
+    else:
+        print("test")
     return False
 
 def assume_user_role(session, role_name, role_arn):
