@@ -1,3 +1,7 @@
 boto3
-termcolor
 botocore
+argparse
+json
+sys
+termcolor
+datetime
