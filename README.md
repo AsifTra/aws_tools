@@ -19,6 +19,5 @@ python3 IAM_keys_validator.py -ak <ACCESS_KEY> -sk <SECRET_KEY> -st <SESSION_TOK
 ## Installation
 ```
 git clone https://github.com/AsifTra/aws_iam_tools.git
-cd aws_tools/
 pip3 install -r requirements.txt
 ```
