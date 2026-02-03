@@ -7,5 +7,3 @@ termcolor
 configparser
 string
 random
-
-ASIAVQ6JYWFC4N3HTEST
